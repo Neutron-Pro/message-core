@@ -15,7 +15,7 @@ dependencies {
 }
 ```
 
-*Don't forget to add your Minecraft server version using the bungeecord-chat library of md_5. (ex: bukkit, spigot, paper)*
+*Don't forget to add your Minecraft server version using the bungeecord-chat library of md_5. (ex: bukkit, spigot, paper) or your bungeecord library.*
 
 # Documentation
 
