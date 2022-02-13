@@ -16,7 +16,7 @@ repositories {
 
 dependencies {
     compileOnly "net.md-5:bungeecord-chat:${project.BUNGEECORD_CHAT_VERSION}"
-    compileOnly "com.github.Neutron-Pro:message-api:${project.MESSAGE_API_VERSION}"
+    implementation "com.github.Neutron-Pro:message-api:${project.MESSAGE_API_VERSION}"
 }
 
 def targetJavaVersion = 8
@@ -30,7 +30,19 @@ java {
 }
 
 tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
     if (targetJavaVersion >= 10 || JavaVersion.current().isJava10Compatible()) {
         options.release = targetJavaVersion
+    }
+}
+
+jar {
+    configurations.implementation.setCanBeResolved(true)
+    configurations.implementation.resolutionStrategy {
+        duplicatesStrategy(DuplicatesStrategy.EXCLUDE)
+    }
+    doFirst {
+        from { (configurations.implementation.findAll { !it.path.endsWith(".pom") })
+                .collect { it.isDirectory() ? it : zipTree(it) } }
     }
 }
