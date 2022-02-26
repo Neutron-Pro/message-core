@@ -11,7 +11,7 @@ repositories {
 }
 
 dependencies {
-  implementation 'com.github.Neutron-Pro:message-core:1.0.0'
+  implementation 'com.github.Neutron-Pro:message-core:1.1.0'
 }
 ```
 
@@ -126,7 +126,39 @@ public void on(PlayerJoinEvent event)
 {
     ChatMessage.of(event.getPlayer().spigot()::sendMessage)
         .next("Welcome on this server !")
+        .hover("play.minecraft.net").close()
+        .send();
+}
+```
+
+## Add hover with color on the message
+
+```java
+@EventHandler
+public void on(PlayerJoinEvent event) 
+{
+    ChatMessage.of(event.getPlayer().spigot()::sendMessage)
+        .next("Welcome on this server !")
         .hover("play.minecraft.net")
+            .color(ChatColor.GOLD)
+            .close()
+        .send();
+}
+```
+
+## Add hover with color and more lines on the message
+
+```java
+@EventHandler
+public void on(PlayerJoinEvent event) 
+{
+    ChatMessage.of(event.getPlayer().spigot()::sendMessage)
+        .next("Welcome on this server !")
+        .hover("play.minecraft.net")
+            .color(ChatColor.GOLD)
+            .nextln("https://minecraft.net/")
+            .color(ChatColor.AQUA)
+            .close()
         .send();
 }
 ```
@@ -172,11 +204,15 @@ public void on(PlayerJoinEvent event)
         .next("[RED]")
         .color(ChatColor.RED)
         .hover("Join the red team")
+            .color(ChatColor.RED)
+            .close()
         .click(ClickEvent.Action.RUN_COMMAND, "/team join red")
         .next("  ")
         .next("[BLUE]")
         .color(ChatColor.BLUE)
         .hover("Join the blue team")
+            .color(ChatColor.BLUE)
+            .close()
         .click(ClickEvent.Action.RUN_COMMAND, "/team join blue")
         .send();
 }
