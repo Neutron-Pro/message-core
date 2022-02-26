@@ -32,11 +32,6 @@ public class ChatMessage extends AbstractComponent<MessageComponent> implements 
     protected final Sender sender;
 
     /**
-     * The current component.
-     */
-    protected BaseComponent currentComponent;
-
-    /**
      * Constructor of ChatMessage.
      * @param sender The sender to whom the components will be sent.
      */
